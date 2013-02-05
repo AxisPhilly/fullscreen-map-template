@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "caseypt",
   "bin": {
-    "axis-fs-map": "./bin/axis-map"
+    "axis-fs-map": "./bin/axis-fs-map"
   },
   "repository": {
     "type": "git",
