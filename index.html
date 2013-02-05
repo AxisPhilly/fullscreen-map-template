@@ -43,18 +43,20 @@
     <script type="text/javascript" src="js/underscore.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript">
-        // Default settings. Overridden by URL params, if they exist
-        app.opts = {
-          mapContainer: 'map',
-          tileURL: 'http://api.tiles.mapbox.com/v3/caseypt.map-ixw9v4sx.jsonp',
-          lat: 39.99,
-          lng: -75.150,
-          zoom: 12 
-        }
-
         $(document).ready(function(){
+          // Default settings. Overridden by URL params, if they exist
+          app.opts = {
+            mapContainer: 'map',
+            tileURL: 'http://api.tiles.mapbox.com/v3/caseypt.map-ixw9v4sx.jsonp',
+            lat: 39.99,
+            lng: -75.150,
+            zoom: 12 
+          }
+
+          // Kick off map
           app.initMap();
 
+          // Setup geocoding
           $("#geocoder").geocodify({
             onSelect: function (result) { 
               app.map
@@ -67,6 +69,7 @@
             ) 
           });
 
+          // Bind toggle
           $("#hide").click(function(){
             $("#info").slideUp();
           })
