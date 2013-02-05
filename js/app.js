@@ -21,17 +21,19 @@ app.initMap = function() {
   function(tilejson) {
     app.map = new L.Map(settings.mapContainer)
       .addLayer(new wax.leaf.connector(tilejson))
-      .setView(new L.LatLng(settings.lat, settings.lng), settings.zoom)
-      .attributionControl.addAttribution(
+      .setView(new L.LatLng(settings.lat, settings.lng), settings.zoom);
+    
+    app.map.attributionControl.addAttribution(
         'Map Data: (c) <a href="http://www.openstreetmap.org">OpenStreetMap</a>'
       );
 
-      app.setEvents();
+    app.setEvents();
   });
 };
 
 // Listen for changes as user pans and zoom on the map
 app.setEvents = function() {
+  console.log(app.map);
   app.map
     .on('zoomend', function(e) {
       app.updateURL();
