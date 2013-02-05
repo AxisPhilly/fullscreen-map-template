@@ -2,9 +2,10 @@ if (typeof app === 'undefined' || !app) {
   var app = {};
 }
 
-// Merge url params with settings set up user
+// Merge url params with settings set by user
 // URL params take preference
 app.mergeSettings = function() {
+  //var params = decodeURIComponent(location.hash.substring(1)).trim().split('&');
   var params = $.url().fparam();
 
   _.defaults(params, app.opts);
@@ -20,12 +21,16 @@ app.initMap = function() {
   function(tilejson) {
     app.map = new L.Map(settings.mapContainer)
       .addLayer(new wax.leaf.connector(tilejson))
-      .setView(new L.LatLng(settings.lat, settings.lng), settings.zoom);
+      .setView(new L.LatLng(settings.lat, settings.lng), settings.zoom)
+      .attributionControl.addAttribution(
+        'Map Data: (c) <a href="http://www.openstreetmap.org">OpenStreetMap</a>'
+      );
 
       app.setEvents();
   });
 };
 
+// Listen for changes as user pans and zoom on the map
 app.setEvents = function() {
   app.map
     .on('zoomend', function(e) {
@@ -36,12 +41,13 @@ app.setEvents = function() {
     });
 };
 
-// Sets lat, lng, and zoom as user pans around maps
+// Gets the current map center and zoom and sets
+// those values in the url
+// i.e. #zoom=12&lat=39.976&lng=-75.172
 app.updateURL = function() {
-  //var params = decodeURIComponent(location.hash.substring(1)).trim().split('&');
   var zoom = app.map.getZoom(),
-      lat = app.map.getCenter().lat,
-      lng = app.map.getCenter().lng,
+      lat = app.map.getCenter().lat.toFixed(3),
+      lng = app.map.getCenter().lng.toFixed(3),
       params = 'zoom=' + zoom + '&lat=' + lat + '&lng=' + lng;
 
   location.hash = params;
