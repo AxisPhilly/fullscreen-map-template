@@ -56,7 +56,11 @@
           app.initMap();
 
           $("#geocoder").geocodify({
-            onSelect: function (result) { alert(result); }
+            onSelect: function (result) { 
+              app.map
+                .panTo(new L.LatLng(result.geometry.location.Ya, result.geometry.location.Za))
+                .setZoom(17);
+            }
           });
 
           $("#hide").click(function(){
