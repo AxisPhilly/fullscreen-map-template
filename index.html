@@ -60,7 +60,11 @@
               app.map
                 .panTo(new L.LatLng(result.geometry.location.Ya, result.geometry.location.Za))
                 .setZoom(17);
-            }
+            },
+            viewportBias: new google.maps.LatLngBounds(
+             new google.maps.LatLng(39.884, -75.318),
+             new google.maps.LatLng(40.130, -74.881)
+            ) 
           });
 
           $("#hide").click(function(){
