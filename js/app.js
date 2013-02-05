@@ -14,7 +14,7 @@ app.mergeSettings = function() {
 };
 
 // Create the map
-app.initMap = function() {
+app.initMap = function(callback) {
   var settings = app.mergeSettings();
 
   wax.tilejson(settings.tileURL,
@@ -28,6 +28,8 @@ app.initMap = function() {
       );
 
     app.setEvents();
+
+    if(callback && typeof callback === 'function') { callback(); }
   });
 };
 
