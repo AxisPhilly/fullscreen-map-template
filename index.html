@@ -70,9 +70,16 @@
           app.opts = {
             mapContainer: 'map',
             tileURL: 'http://api.tiles.mapbox.com/v3/caseypt.map-kbiq8yif.jsonp',
-            lat: 39.99,
-            lng: -75.150,
-            zoom: 12 
+            mapOptions: {
+              center: [39.99, -75.150],
+              zoom: 12,
+              minZoom: 11,
+              maxZoom: 18,
+              maxBounds: [
+                [39.69, -76.20],
+                [40.60, -74.14]
+              ]
+            }
           }
 
           // Kick off map

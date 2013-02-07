@@ -4,24 +4,25 @@ if (typeof app === 'undefined' || !app) {
 
 // Merge url params with settings set by user
 // URL params take preference
-app.mergeSettings = function() {
+app.mergeMapSettings = function() {
   //var params = decodeURIComponent(location.hash.substring(1)).trim().split('&');
   var params = $.url().fparam();
 
-  _.defaults(params, app.opts);
+  _.defaults(params, app.opts.mapOptions);
 
   return params;
 };
 
 // Create the map
 app.initMap = function(callback) {
-  var settings = app.mergeSettings();
+  var mapSettings = app.mergeMapSettings();
+  console.log(mapSettings);
 
-  wax.tilejson(settings.tileURL,
+  wax.tilejson(app.opts.tileURL,
   function(tilejson) {
-    app.map = new L.Map(settings.mapContainer)
+    app.map = new L.Map(app.opts.mapContainer, mapSettings)
       .addLayer(new wax.leaf.connector(tilejson))
-      .setView(new L.LatLng(settings.lat, settings.lng), settings.zoom);
+      .setView(mapSettings.center, mapSettings.zoom);
     
     app.map.attributionControl.addAttribution(
         'Map Data: (c) <a href="http://www.openstreetmap.org">OpenStreetMap</a>'
