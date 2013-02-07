@@ -5,12 +5,19 @@ if (typeof app === 'undefined' || !app) {
 // Merge url params with settings set by user
 // URL params take preference
 app.mergeMapSettings = function() {
-  //var params = decodeURIComponent(location.hash.substring(1)).trim().split('&');
-  var params = $.url().fparam();
+  var mapParams = {},
+      urlParams = decodeURIComponent(location.hash.substring(1)).trim().split('/');
 
-  _.defaults(params, app.opts.mapOptions);
+  if(urlParams[1] && typeof urlParams[1] === "number") {
+    mapParams = {
+      zoom: urlParams[1],
+      center: [urlParams[2], urlParams[3]]
+    };
+  }
 
-  return params;
+  _.defaults(mapParams, app.opts.mapOptions);
+
+  return mapParams;
 };
 
 // Create the map
@@ -52,7 +59,7 @@ app.updateURL = function() {
   var zoom = app.map.getZoom(),
       lat = app.map.getCenter().lat.toFixed(3),
       lng = app.map.getCenter().lng.toFixed(3),
-      params = 'zoom=' + zoom + '&lat=' + lat + '&lng=' + lng;
+      params = '/' + zoom + '/' + lat + '/' + lng;
 
   location.hash = params;
 };
