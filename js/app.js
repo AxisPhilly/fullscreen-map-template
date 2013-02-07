@@ -35,7 +35,6 @@ app.initMap = function(callback) {
 
 // Listen for changes as user pans and zoom on the map
 app.setEvents = function() {
-  console.log(app.map);
   app.map
     .on('zoomend', function(e) {
       app.updateURL();
