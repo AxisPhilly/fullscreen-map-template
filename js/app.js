@@ -8,7 +8,7 @@ app.mergeMapSettings = function() {
   var mapParams = {},
       urlParams = decodeURIComponent(location.hash.substring(1)).trim().split('/');
 
-  if(urlParams[1] && typeof urlParams[1] === "number") {
+  if(urlParams[1] && typeof Number(urlParams[1]) === "number") {
     mapParams = {
       zoom: urlParams[1],
       center: [urlParams[2], urlParams[3]]
