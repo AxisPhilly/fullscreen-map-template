@@ -2,9 +2,6 @@
   "name": "AxisPhilly Full-Screen Map Template",
   "version": "0.0.1",
   "author": "caseypt",
-  "bin": {
-    "axis-fs-map": "./bin/axis-fs-map"
-  },
   "repository": {
     "type": "git",
     "url": "http://www.github.com/AxisPhilly/fullscreen-map-template"
